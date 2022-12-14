@@ -1,8 +1,8 @@
 name: Check release label
 
 env:
-  GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GITHUB_USERNAME: ${{ secrets.RELEASE_GITHUB_USERNAME }}
+  GITHUB_TOKEN: ${{ secrets.RELEASE_GITHUB_TOKEN }}
 
 on:
   pull_request:
@@ -18,7 +18,7 @@ jobs:
           (contains(github.event.pull_request.labels.*.name, 'release-minor') && contains(github.event.pull_request.labels.*.name, 'release-patch')) ||
           (contains(github.event.pull_request.labels.*.name, 'release-patch') && contains(github.event.pull_request.labels.*.name, 'release-major'))
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.RELEASE_GITHUB_TOKEN }}
           script: |
             core.setFailed('This pr has multiple release label.')
       - uses: actions/github-script@v6
@@ -29,6 +29,6 @@ jobs:
             (contains(github.event.pull_request.labels.*.name, 'release-patch') && contains(github.event.pull_request.labels.*.name, 'release-major'))
           )
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.RELEASE_GITHUB_TOKEN }}
           script: |
             core.info('ok')
