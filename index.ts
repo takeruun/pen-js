@@ -6,3 +6,8 @@ export const exec = () => {
 
   return PEN_JS;
 };
+
+// 入力数値を返す
+export const returnN = (n:number) => {
+  return n;
+}
