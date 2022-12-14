@@ -51,3 +51,11 @@ jobs:
           echo "HASH=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
       - name: Push Upstream
         run: git push origin main
+      - name: Release
+        uses: actions/create-release@v1
+        with:
+          draft: false
+          tag_name: v${{steps.version_up.outputs.VERSION}}
+          release_name: v${{steps.version_up.outputs.VERSION}}
+          commitish: ${{steps.version_up.outputs.HASH}}
+          body: ${{ github.event.pull_request.html_url }}
