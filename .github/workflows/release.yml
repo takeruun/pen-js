@@ -25,7 +25,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version-file: .node-versions
+          node-version-file: .node-version
       - run: git fetch origin
       - name: Set Version Level
         id: set_version_level
